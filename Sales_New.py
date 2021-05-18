@@ -72,10 +72,10 @@ st.markdown(
 
 col1, col2, col3 =st.beta_columns([47.5,5,47.5])
 #------------------------------------------Data per Category -----------------------------------------------------
-rent_category = rent.groupby(rent['Sales Category']).sum()
-rent_category = pd.DataFrame(rent_category.to_records())
-rent_category = rent_category.drop(['Sales Category', 'GLA'], axis=1)
-rent_category = pd.DataFrame(rent_category.to_records())
+#rent_category = rent.groupby(rent['Sales Category']).sum()
+#rent_category = pd.DataFrame(rent_category.to_records())
+#rent_category = rent_category.drop(['Sales Category', 'GLA'], axis=1)
+#rent_category = pd.DataFrame(rent_category.to_records())
 sales_category = sales.groupby(sales['Sales Category']).sum()
 sales_category = pd.DataFrame(sales_category.to_records())
 sales_category = pd.concat([sales_category, rent_category.reindex(sales_category.index)], axis=1)
