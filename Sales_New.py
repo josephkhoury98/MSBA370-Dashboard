@@ -20,10 +20,10 @@ from sklearn.metrics import mean_squared_error
 import matplotlib.image as mpimg
 
 #------------------------------ Data collection ---------------------------------
-sales = pd.read_csv('C:/Users/Admin/Desktop/Project/SALES_SALES.csv')
+sales = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/SALES_SALES.csv')
 sales = sales.rename({'Sales Category': 'Sales_Category'}, axis=1)
 sales.info()
-rent = pd.read_csv('C:/Users/Admin/Desktop/Project/RENT_RENT.csv')
+rent = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/RENT_RENT.csv')
 rent = rent.rename({'Sales Category': 'Sales_Category'}, axis=1)
 rent.info()
 
