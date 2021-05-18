@@ -21,10 +21,10 @@ import matplotlib.image as mpimg
 
 #------------------------------ Data collection ---------------------------------
 sales = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/SALES_SALES.csv',error_bad_lines=False)
-sales = sales.rename({'Sales Category': 'sales_cat'}, axis=1)
+sales = sales.rename({'Sales Category': 'Sales Category'}, axis=1)
 sales.info()
 rent = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/RENT_RENT.csv', error_bad_lines=False)
-rent = rent.rename({'Sales Category': 'sales_cat'}, axis=1)
+rent = rent.rename({'Sales Category': 'Sales Category'}, axis=1)
 rent.info()
 
 missing_values_count = pd.DataFrame({'Null':sales.isnull().sum()})
@@ -72,11 +72,11 @@ st.markdown(
 
 col1, col2, col3 =st.beta_columns([47.5,5,47.5])
 #------------------------------------------Data per Category -----------------------------------------------------
-rent_category = rent.groupby(rent['sales_cat']).sum()
+rent_category = rent.groupby(rent['Sales Category']).sum()
 rent_category = pd.DataFrame(rent_category.to_records())
-rent_category = rent_category.drop(['sales_cat', 'GLA'], axis=1)
+rent_category = rent_category.drop(['Sales Category', 'GLA'], axis=1)
 rent_category = pd.DataFrame(rent_category.to_records())
-sales_category = sales.groupby(sales['sales_cat']).sum()
+sales_category = sales.groupby(sales['Sales Category']).sum()
 sales_category = pd.DataFrame(sales_category.to_records())
 sales_category = pd.concat([sales_category, rent_category.reindex(sales_category.index)], axis=1)
 sales_category['Sales by SQM'] = sales_category['Sales']/sales_category['GLA']
@@ -93,8 +93,8 @@ missing_cat_values_count.sort_values(by='Null', ascending = False)
 #No missing values thus no need to impute or do anything
 
 rent_sales_persqm = make_subplots(specs=[[{"secondary_y": True}]])
-rent_sales_persqm.add_trace(go.Scatter(x=sales_category['sales_cat'], y=sales_category['Rent by SQM'], name = 'Rent per SQM'),secondary_y=True,)
-rent_sales_persqm.add_trace(go.Bar(x=sales_category['sales_cat'], y=sales_category['Sales by SQM'], name= "Categories"),secondary_y=False,)
+rent_sales_persqm.add_trace(go.Scatter(x=sales_category['Sales Category'], y=sales_category['Rent by SQM'], name = 'Rent per SQM'),secondary_y=True,)
+rent_sales_persqm.add_trace(go.Bar(x=sales_category['Sales Category'], y=sales_category['Sales by SQM'], name= "Categories"),secondary_y=False,)
 #rent_sales_persqm.update_layout(title_text="Double Y Axis Example")
 rent_sales_persqm.update_layout(xaxis={'visible': False, 'showticklabels': False})
 rent_sales_persqm.update_layout(template="simple_white")
@@ -108,7 +108,7 @@ rent_sales_persqm.update_yaxes(title_text="<b>Sales </b>per SQM", secondary_y=Fa
 #----------------------------------------------------------------------------------------------------------
 
 sales_area = px.scatter(sales_category,x= sales_category['GLA'],y= sales_category['Sales'], trendline='ols', trendline_color_override = 'lightgrey' ,
- template="simple_white", labels={'GLA' : 'Area (in SQM)'}, hover_name=sales_category['sales_cat'] )
+ template="simple_white", labels={'GLA' : 'Area (in SQM)'}, hover_name=sales_category['Sales Category'] )
 #----------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ col3.plotly_chart (sales_area)
 #--------------------------------------Prediction of Sales------------------------
 pred_data = sales_category
 pred_data = pred_data.drop('index', axis=1)
-categorical_df = pred_data[['sales_cat']]
+categorical_df = pred_data[['Sales Category']]
 numerical_df = pred_data[['GLA', 'Sales', 'Rent', 'Rent by SQM']]
 dummy = pd.get_dummies(categorical_df)
 encoded_df= pd.concat ([numerical_df, dummy], axis=1)
