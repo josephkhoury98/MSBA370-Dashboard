@@ -23,6 +23,7 @@ import matplotlib.image as mpimg
 sales = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/SALES_SALES.csv',error_bad_lines=False)
 #sales = sales.rename({'Sales Category': 'Sales Category'}, axis=1)
 sales.info()
+sales
 rent = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/RENT_RENT.csv', error_bad_lines=False)
 #rent = rent.rename({'Sales Category': 'Sales Category'}, axis=1)
 rent.info()
@@ -72,10 +73,10 @@ st.markdown(
 
 col1, col2, col3 =st.beta_columns([47.5,5,47.5])
 #------------------------------------------Data per Category -----------------------------------------------------
-#rent_category = rent.groupby(rent['Sales Category']).sum()
-#rent_category = pd.DataFrame(rent_category.to_records())
-#rent_category = rent_category.drop(['Sales Category', 'GLA'], axis=1)
-#rent_category = pd.DataFrame(rent_category.to_records())
+rent_category = rent.groupby(rent['Sales Category']).sum()
+rent_category = pd.DataFrame(rent_category.to_records())
+rent_category = rent_category.drop(['Sales Category', 'GLA'], axis=1)
+rent_category = pd.DataFrame(rent_category.to_records())
 sales_category = sales.groupby(sales['Sales Category']).sum()
 sales_category = pd.DataFrame(sales_category.to_records())
 sales_category = pd.concat([sales_category, rent_category.reindex(sales_category.index)], axis=1)
