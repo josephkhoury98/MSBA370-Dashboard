@@ -21,10 +21,10 @@ import matplotlib.image as mpimg
 
 #------------------------------ Data collection ---------------------------------
 sales = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/SALES_SALES.csv',error_bad_lines=False)
-sales = sales.rename({'Sales Category': 'Sales Category'}, axis=1)
+#sales = sales.rename({'Sales Category': 'Sales Category'}, axis=1)
 sales.info()
 rent = pd.read_csv('https://github.com/josephkhoury98/MSBA370-Dashboard/blob/main/RENT_RENT.csv', error_bad_lines=False)
-rent = rent.rename({'Sales Category': 'Sales Category'}, axis=1)
+#rent = rent.rename({'Sales Category': 'Sales Category'}, axis=1)
 rent.info()
 
 missing_values_count = pd.DataFrame({'Null':sales.isnull().sum()})
