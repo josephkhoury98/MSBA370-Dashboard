@@ -45,7 +45,7 @@ missing_rent_values_count.sort_values(by='Null', ascending = False)
 st.set_page_config(layout='wide')
 #st.markdown(f"<h1 style='text-align:Center; font-family:arial;' >{'<b>MSBA 370 - DDDM</b>'}</h1>", unsafe_allow_html=True)
 
-LOGO_IMAGE = mpimg.imread('C:/Users/Admin/Desktop/Project/Majid Al Futtaim logo.png')
+#LOGO_IMAGE = mpimg.imread('C:/Users/Admin/Desktop/Project/Majid Al Futtaim logo.png')
 st.markdown(
     """
     <style>
